@@ -1,0 +1,350 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background: linear-gradient(90.29deg, #E2C35D 0%, #D88771 100%);
+    font-family: 'Poppins', sans-serif;
+   
+}
+
+.logo{
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+.nav-links li{
+   list-style: none; 
+}
+
+.nav-links a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.burger{
+    display:none;
+    cursor: pointer;
+}
+
+.burger div{
+    width: 25px;
+    height: 5px;
+    background-color: white;
+    margin: 3px;
+    transition:all 0.3s ease;
+    
+}
+
+@media screen and (max-width:1024px){
+    .nav-links{
+        width: 60%;
+    }
+
+        
+}
+
+@media screen and (max-width:768px){
+    body{
+        overflow-x: hidden;
+    }
+    .nav-links{
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background: linear-gradient(90.29deg, #E2C35D 0%, #D88771 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    .nav-links li{
+        opacity: 0;
+    }
+    .burger{
+        display: block;
+    }
+}
+
+.nav-active{
+    transform: translate(0%);
+}
+
+@keyframes navLinkFade{
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1{
+  transform: rotate(-45deg) translate(-5px, 6px);  
+}
+
+.toggle .line2{
+   opacity: 0; 
+}
+
+.toggle .line3{
+    transform: rotate(45deg) translate(-5px, -6px);  
+}
+  
+  body {
+    font-family: sans-serif;
+  }
+  i,
+  svg {
+    pointer-events: none;
+  }
+  
+  .kick-pad,
+  .snare-pad,
+  .hihat-pad {
+    width: 5rem;
+    height: 5rem;
+    margin: 1rem 0.5rem;
+    cursor: pointer;
+  }
+  .kick-pad {
+    background: linear-gradient(rgb(57, 202, 142),rgb(52, 246, 168));
+  }
+  .snare-pad {
+    background: rgb(224, 160, 208);
+  }
+  .hihat-pad {
+    background: rgb(224, 194, 160);
+  }
+  .kick-pad.active {
+    background: rgb(59, 197, 231);
+  }
+  .snare-pad.active {
+    background: rgb(218, 58, 178);
+  }
+  .hihat-pad.active {
+    background: rgb(241, 158, 64);
+  }
+  
+  .sequencer {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hihat-track,
+  .snare-track,
+  .kick-track {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    justify-content: space-between;
+    margin-top: 5rem;
+  }
+  .kick,
+  .snare,
+  .hihat {
+    display: flex;
+  }
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    margin: 0rem 2rem;
+  }
+  .controls button {
+    padding: 1rem;
+    border: none;
+    background: rgb(88, 88, 88);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+  
+  .pad {
+    transition: all 0.5s ease;
+  }
+  
+  .play {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    background: rgb(88, 88, 88);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 3rem;
+  }
+  
+  select {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .mute.active {
+    background: rgb(182, 182, 182);
+  }
+  
+  .tempo {
+    margin: 3rem;
+    width: 30%;
+  }
+  .tempo-slider {
+    padding: 0.2rem;
+    -webkit-appearance: none;
+    margin: 1rem 0rem;
+    width: 100%;
+    position: relative;
+    background: rgb(88, 88, 88);
+    cursor: pointer;
+    border-radius: 1rem;
+  }
+  .tempo p {
+    font-size: 1.5rem;
+    margin: 2rem;
+    text-align: center;
+  }
+  
+  @keyframes playTrack {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.2);
+    }
+  }
+
+  nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background: linear-gradient(90.29deg, #E2C35D 0%, #D88771 100%);
+    font-family: 'Poppins', sans-serif;
+   
+}
+
+.logo{
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+.nav-links li{
+   list-style: none; 
+}
+
+.nav-links a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.burger{
+    display:none;
+    cursor: pointer;
+}
+
+.burger div{
+    width: 25px;
+    height: 5px;
+    background-color: white;
+    margin: 3px;
+    transition:all 0.3s ease;
+    
+}
+
+@media screen and (max-width:1024px){
+    .nav-links{
+        width: 60%;
+    }
+
+        
+}
+
+@media screen and (max-width:768px){
+    body{
+        overflow-x: hidden;
+    }
+    .nav-links{
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background: linear-gradient(90.29deg, #E2C35D 0%, #D88771 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    .nav-links li{
+        opacity: 0;
+    }
+    .burger{
+        display: block;
+    }
+}
+
+.nav-active{
+    transform: translate(0%);
+}
+
+@keyframes navLinkFade{
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1{
+  transform: rotate(-45deg) translate(-5px, 6px);  
+}
+
+.toggle .line2{
+   opacity: 0; 
+}
+
+.toggle .line3{
+    transform: rotate(45deg) translate(-5px, -6px);  
+}
+
+.cool{
+    margin-top: 20px;
+}
+

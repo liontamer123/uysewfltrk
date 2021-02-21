@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/beats.css" />
+    <title>Beatmaker</title>
+  </head>
+  <body>
+    <nav>
+        <div class="logo">
+            <h4>
+                Schoolation
+            </h4>
+        </div>
+
+
+        <ul class="nav-links">
+            <li>
+                <a href="index.html">Home</a>
+
+                </li>
+            <li>
+                <a href="todo.html">Todo</a>
+
+                </li>
+            <li>
+                <a href="beats.html">beats</a>
+
+                </li>
+                <li>
+                  <a href="login.html">Login/Register</a>
+  
+                  </li>
+
+        </ul>
+        <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+        </div>
+
+    </nav>
+    <div class="Cool">
+    <div class="sequencer">
+      <div class="kick-track">
+        <div class="controls">
+          <h1>Kick</h1>
+          <button data-track="0" class="mute kick-volume">
+            <i class="fas fa-volume-mute"></i>
+          </button>
+          <select name="kick-select" id="kick-select">
+            <option value="../sound/kick-classic.wav">Classic Kick</option>
+            <option value="../sound/kick-808.wav">808 Kick</option>
+            <option value="../sound/kick-heavy.wav">Kick Heavy</option>
+            <option value=../sound/kick-softy.wav">Kick Softy</option>
+          </select>
+        </div>
+        <div class="kick">
+          <div class="pad kick-pad b0"></div>
+          <div class="pad kick-pad b1"></div>
+          <div class="pad kick-pad b2"></div>
+          <div class="pad kick-pad b3"></div>
+          <div class="pad kick-pad b4"></div>
+          <div class="pad kick-pad b5"></div>
+          <div class="pad kick-pad b6"></div>
+          <div class="pad kick-pad b7"></div>
+        </div>
+      </div>
+      <div class="snare-track">
+        <div class="controls">
+          <h1>Snare</h1>
+          <button data-track="1" class="mute snare-volume">
+            <i class="fas fa-volume-mute"></i>
+          </button>
+          <select name="snare-select" id="snare-select">
+            <option value="../sound/snare-acoustic01.wav">Classic Snare</option>
+            <option value="../sound/snare-808.wav">808 Snare</option>
+            <option value="../sound/snare-vinyl02.wav">Snare Vinyl</option>
+          </select>
+        </div>
+        <div class="snare">
+          <div class="pad snare-pad b0"></div>
+          <div class="pad snare-pad b1"></div>
+          <div class="pad snare-pad b2"></div>
+          <div class="pad snare-pad b3"></div>
+          <div class="pad snare-pad b4"></div>
+          <div class="pad snare-pad b5"></div>
+          <div class="pad snare-pad b6"></div>
+          <div class="pad snare-pad b7"></div>
+        </div>
+      </div>
+      <div class="hihat-track">
+        <div class="controls">
+          <h1>Hihat</h1>
+          <button data-track="2" class="mute hihat-volume">
+            <i class="fas fa-volume-mute"></i>
+          </button>
+          <select name="hihat-select" id="hihat-select">
+            <option value="./sounds/hihat-acoustic01.wav"
+              >Hihat Acoustic</option
+            >
+            <option value="./sound/hihat-808.wav">808 Hihat</option>
+          </select>
+        </div>
+        <div class="hihat">
+          <div class="pad hihat-pad b0"></div>
+          <div class="pad hihat-pad b1"></div>
+          <div class="pad hihat-pad b2"></div>
+          <div class="pad hihat-pad b3"></div>
+          <div class="pad hihat-pad b4"></div>
+          <div class="pad hihat-pad b5"></div>
+          <div class="pad hihat-pad b6"></div>
+          <div class="pad hihat-pad b7"></div>
+        </div>
+      </div>
+      <button class="play">Play</button>
+      <div class="tempo">
+        <input
+          type="range"
+          class="tempo-slider"
+          max="300"
+          min="20"
+          value="150"
+        />
+        <p>Tempo: <span class="tempo-nr">150</span></p>
+      </div>
+    </div>
+
+    <audio class="kick-sound" src="../sound/kick-classic.wav"></audio>
+    <audio class="snare-sound" src="../sound/snare-acoustic01.wav"></audio>
+    <audio class="hihat-sound" src="../sound/hihat-acoustic01.wav"></audio>
+</div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+      integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+      crossorigin="anonymous"
+    ></script>
+    <script>class DrumKit {
+        constructor() {
+          this.pads = document.querySelectorAll(".pad");
+          this.playBtn = document.querySelector(".play");
+          this.currentKick = "./sounds/kick-classic.wav";
+          this.currentSnare = "./sounds/snare-acoustic01.wav";
+          this.currentHihat = "./sounds/hihat.acoustic01.wav";
+          this.kickAudio = document.querySelector(".kick-sound");
+          this.snareAudio = document.querySelector(".snare-sound");
+          this.hihatAudio = document.querySelector(".hihat-sound");
+          this.index = 0;
+          this.bpm = 150;
+          this.isPlaying = null;
+          this.selects = document.querySelectorAll("select");
+          this.muteBtns = document.querySelectorAll(".mute");
+          this.tempoSlider = document.querySelector(".tempo-slider");
+        }
+        activePad() {
+          this.classList.toggle("active");
+        }
+        repeat() {
+          let step = this.index % 8;
+          const activeBars = document.querySelectorAll(`.b${step}`);
+          //Loop over the pads
+          activeBars.forEach(bar => {
+            bar.style.animation = `playTrack 0.3s alternate ease-in-out 2`;
+            if (bar.classList.contains("active")) {
+              if (bar.classList.contains("kick-pad")) {
+                this.kickAudio.currentTime = 0;
+                this.kickAudio.play();
+              }
+              if (bar.classList.contains("snare-pad")) {
+                this.snareAudio.currentTime = 0;
+                this.snareAudio.play();
+              }
+              if (bar.classList.contains("hihat-pad")) {
+                this.hihatAudio.currentTime = 0;
+                this.hihatAudio.play();
+              }
+            }
+          });
+          this.index++;
+        }
+        start() {
+          const interval = (60 / this.bpm) * 1000;
+          //Check if it's playing
+      
+          if (this.isPlaying) {
+            //Clear the interval
+            clearInterval(this.isPlaying);
+            console.log(this.isPlaying);
+            this.isPlaying = null;
+          } else {
+            this.isPlaying = setInterval(() => {
+              this.repeat();
+            }, interval);
+          }
+        }
+        updateBtn() {
+          //NULL
+      
+          if (!this.isPlaying) {
+            this.playBtn.innerText = "Stop";
+            this.playBtn.classList.add("active");
+          } else {
+            this.playBtn.innerText = "Play";
+            this.playBtn.classList.remove("active");
+          }
+        }
+        changeSound(e) {
+          const selectionName = e.target.name;
+          const selectionValue = e.target.value;
+          switch (selectionName) {
+            case "kick-select":
+              this.kickAudio.src = selectionValue;
+              break;
+            case "snare-select":
+              this.snareAudio.src = selectionValue;
+              break;
+            case "hihat-select":
+              this.hihatAudio.src = selectionValue;
+              break;
+          }
+        }
+        mute(e) {
+          const muteIndex = e.target.getAttribute("data-track");
+          e.target.classList.toggle("active");
+          if (e.target.classList.contains("active")) {
+            switch (muteIndex) {
+              case "0":
+                this.kickAudio.volume = 0;
+                break;
+              case "1":
+                this.snareAudio.volume = 0;
+                break;
+              case "2":
+                this.hihatAudio.volume = 0;
+                break;
+            }
+          } else {
+            switch (muteIndex) {
+              case "0":
+                this.kickAudio.volume = 1;
+                break;
+              case "1":
+                this.snareAudio.volume = 1;
+                break;
+              case "2":
+                this.hihatAudio.volume = 1;
+                break;
+            }
+          }
+        }
+        changeTempo(e) {
+          const tempoText = document.querySelector(".tempo-nr");
+      
+          tempoText.innerText = e.target.value;
+        }
+        updateTempo(e) {
+          this.bpm = e.target.value;
+          clearInterval(this.isPlaying);
+          this.isPlaying = null;
+          const playBtn = document.querySelector(".play");
+          if (playBtn.classList.contains("active")) {
+            this.start();
+          }
+        }
+      }
+      
+      const drumKit = new DrumKit();
+      
+      //Event Listeners
+      
+      drumKit.pads.forEach(pad => {
+        pad.addEventListener("click", drumKit.activePad);
+        pad.addEventListener("animationend", function() {
+          this.style.animation = "";
+        });
+      });
+      
+      drumKit.playBtn.addEventListener("click", function() {
+        drumKit.updateBtn();
+        drumKit.start();
+      });
+      
+      drumKit.selects.forEach(select => {
+        select.addEventListener("change", function(e) {
+          drumKit.changeSound(e);
+        });
+      });
+      drumKit.muteBtns.forEach(btn => {
+        btn.addEventListener("click", function(e) {
+          drumKit.mute(e);
+        });
+      });
+      
+      drumKit.tempoSlider.addEventListener("input", function(e) {
+        drumKit.changeTempo(e);
+      });
+      drumKit.tempoSlider.addEventListener("change", function(e) {
+        drumKit.updateTempo(e);
+      });
+      </script>
+  </body>
+</html>
